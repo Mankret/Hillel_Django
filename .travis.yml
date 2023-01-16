@@ -1,0 +1,12 @@
+language: python
+python:
+  - "3.10"
+before_install:
+  - python -m pip install --upgrade pip
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+befor_script:
+  - python manage.py migrate
+sctipt:
+  - flake8 .

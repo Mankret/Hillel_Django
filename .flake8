@@ -1,0 +1,4 @@
+[flake8]
+max-line-length = 120
+extend-ignore = F401 # imported but not used
+exclude = migrations,.git, __pycache__,venv, tests.py,tests # venv for windows and linux manjaro
