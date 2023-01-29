@@ -1,5 +1,3 @@
-import sys
-
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
 
@@ -12,13 +10,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         users_ids = kwargs['user_id']
-        superuser = User.objects.get(is_superuser=True)
-        if superuser.id in users_ids:
-            sys.exit(f"Can't delete superuser: {superuser}, id: {superuser.id}")
+        superuser = User.objects.filter(is_superuser=True)
+        users = User.objects.filter(id__in=users_ids)
 
-        try:
-            users = list(map(lambda x: User.objects.get(pk=x).delete(), users_ids))
-            self.stdout.write(
-                self.style.SUCCESS('Users successfully removed'))
-        except User.DoesNotExist as Error:
-            self.stdout.write(self.style.WARNING(f'{Error}'))
+        if users.filter(id__in=superuser).exists():
+            self.stdout.write(self.style.WARNING("Can't delete superuser"))
+        else:
+            users.delete()
+

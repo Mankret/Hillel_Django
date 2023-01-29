@@ -7,4 +7,5 @@ extend-ignore =
                 # A003 use in custom command
                 F841
                 # use local variable 'users' in custom command
+                W391
 exclude = migrations,.git, __pycache__,venv, tests.py,tests # venv for windows and linux manjaro
