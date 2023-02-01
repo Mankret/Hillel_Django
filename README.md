@@ -1,12 +1,24 @@
-Инициализоровать новый django проект с последней версией django.
-В .gitignore не забыть добавить (удостовериться в наличии) файл базы данных, папку виртульаного окружения (если она в папке проекта) и папку настроект среды разработки.
-Создать requirements.txt.
-Создать django приложение catalog.
-Убедиться что SECRET_KEY будет взят из переменных окружения.
+Visualization of the work of the catalog application.
+
+![Catalog](https://github.com/Mankret/Hillel_Django/blob/main/static/my_project_visualized.png)
 
 
-Инициализировал django проект в новом репозитории.
-Создал django приложение и добавил его в INSTALLED_APPS.
-В .gitignore добавлены: файл базы данных, папка настроект среды разработки.
-Добавил все зависимости в requirements.txt.
-SECRET_KEY вынесен в переменную окружения.
+
+1. ManyToManyField
+
+     ![MtM](https://github.com/Mankret/Hillel_Django/blob/main/static/mtm.png)
+     
+     
+     
+     
+     
+2. ForeignKey 
+
+     ![FK](https://github.com/Mankret/Hillel_Django/blob/main/static/FK.png)
+     
+     
+     
+     
+3. OneToOneField
+
+      ![OtO](https://github.com/Mankret/Hillel_Django/blob/main/static/oto.png)
