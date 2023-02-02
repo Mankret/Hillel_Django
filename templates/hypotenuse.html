@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Triangle</title>
+</head>
+<body>
+    <form action="/triangle/" method="GET">
+        {{form.as_p}}
+        {% if hyp %}
+            <p>The hypotenuse is: {{hyp}}</p>
+        {% endif %}
+         <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

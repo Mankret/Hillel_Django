@@ -18,8 +18,11 @@ from django.urls import include
 from django.urls import path
 from django.views.generic import RedirectView
 
+from mathapp.views import triangle
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("triangle/", triangle),
 ]
 
 urlpatterns += [
