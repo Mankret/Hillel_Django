@@ -1,0 +1,5 @@
+<p><a href="{% url 'mathapp:index' %}">Home</a> </p>
+<p><a href="{% url 'mathapp:person_update' person.id %}">Update</a> </p>
+{% block content %}
+<h2>{{person.first_name}} {{person.last_name}}</h2>
+{% endblock %}

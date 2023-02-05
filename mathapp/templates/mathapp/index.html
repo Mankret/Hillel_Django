@@ -1,0 +1,18 @@
+<p><a href="{% url 'mathapp:person_create' %}">Create Person</a> </p>
+{% block content %}
+<h1>Person List</h1>
+{% if person_list %}
+<ol>
+{% for person in person_list%}
+    <li>
+        <p><strong><a href="{% url 'mathapp:detail' person.id %}">{{person.first_name}} {{person.last_name}}</a></strong></p>
+    </li>
+    {% endfor %}
+</ol>
+{%else%}
+<p>Person has not yet been created</p>
+{%endif%}
+{% endblock %}
+
+
+

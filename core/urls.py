@@ -23,6 +23,7 @@ from mathapp.views import triangle
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("triangle/", triangle),
+    path("mathapp/", include('mathapp.urls')),
 ]
 
 urlpatterns += [
