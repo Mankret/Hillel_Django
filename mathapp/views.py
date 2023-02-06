@@ -43,7 +43,7 @@ def person_create(request):
             return redirect(reverse('mathapp:detail', args=(obj.id,)))
     else:
         form = PersonCreateForm()
-        return render(request, "mathapp/person_create.html", {"form": form})
+    return render(request, "mathapp/person_create.html", {"form": form})
 
 
 def person_update(request, pk):
