@@ -7,12 +7,12 @@ admin.site.register(Person)
 
 @admin.register(LogModel)
 class LogModelAdmin(admin.ModelAdmin):
-    list_display = ('path', 'method', 'create')
+    list_display = ('path', 'method', 'created')
     fieldsets = [
         ('Information', {'fields': ['path']}),
         ('Detail', {'fields': ['method', 'body', 'query', 'user'], 'classes': ('wide', 'extrapretty')})
     ]
 
-    list_filter = ['create', 'method', 'user']
+    list_filter = ['created', 'method', 'user']
     search_fields = ['path']
-    date_hierarchy = 'create'
+    date_hierarchy = 'created'

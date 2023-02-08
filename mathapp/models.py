@@ -13,7 +13,7 @@ class Person(models.Model):
 class LogModel(models.Model):
     path = models.CharField(max_length=200)
     method = models.CharField(max_length=120)
-    create = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
     user = models.CharField(max_length=120)
     title = models.CharField(max_length=60, default='Log')
     query = models.TextField()
