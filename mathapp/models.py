@@ -8,3 +8,16 @@ class Person(models.Model):
 
     def __str__(self):
         return f'{self.first_name}'
+
+
+class LogModel(models.Model):
+    path = models.CharField(max_length=200, null=True)
+    method = models.CharField(max_length=120, null=True)
+    create = models.DateTimeField(auto_now_add=True)
+    user = models.CharField(max_length=120, null=True)
+    title = models.CharField(max_length=60, default='Log')
+    query = models.TextField(null=True)
+    body = models.TextField(null=True)
+
+    def __str__(self):
+        return self.title
