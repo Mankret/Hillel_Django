@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from mathapp.models import Person, LogModel
+from mathapp.models import LogModel, Person
 
 admin.site.register(Person)
 
