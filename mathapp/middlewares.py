@@ -8,16 +8,13 @@ class LogMiddleware:
     def __call__(self, request):
         response = self.get_response(request)
 
-        if '/admin/' not in request.path:
-            if request.method == 'POST':
-                LogModel.objects.create(path=request.path,
-                                        method=request.method,
-                                        body=request.POST.dict(),
-                                        query=request.GET.dict(),
-                                        user=request.user.username,
-                                        )
-            LogModel.objects.create(path=request.path,
-                                    method=request.method,
-                                    query=request.GET.dict(),
-                                    user=request.user.username)
+        if '/admin/' in request.path:
+            return response
+        LogModel.objects.create(path=request.path,
+                                method=request.method,
+                                body=request.POST.dict(),
+                                query=request.GET.dict(),
+                                user=request.user.username,
+                                )
+
         return response
