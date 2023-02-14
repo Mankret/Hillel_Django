@@ -24,6 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("triangle/", triangle),
     path("mathapp/", include('mathapp.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),
+    path('docsapp/', include('docsapp.urls')),
 ]
 
 urlpatterns += [

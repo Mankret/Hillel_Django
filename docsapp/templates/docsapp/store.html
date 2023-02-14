@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Store</title>
+</head>
+<body>
+{% if store_list %}
+{% for key, values in book_price.items %}
+<p><strong>Book price: </strong>{{key}}: {{values}} </p>
+    {% endfor %}
+
+<ol>
+{% for store in store_list %}
+<li>
+    <a href ="{{store.get_absolute_url}}"><strong>Store:</strong> {{ store.name }}
+</li>
+    {% endfor %}
+</ol>
+
+{%else%}
+<p>No Store</p>
+{%endif%}
+
+</body>
+</html>

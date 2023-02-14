@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p><a href =" {% url 'docsapp:index' %}">Home</a></p>
+<a href =" {% url 'docsapp:publisher' %}">All Publishers</a>
+{% block content %}
+  <h1>{{ publisher.name}}</h1>
+<strong>Total books: {{publisher.book__count}}</strong>
+
+{% endblock %}
+</body>
+</html>

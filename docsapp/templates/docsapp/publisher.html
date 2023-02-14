@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Publisher</title>
+</head>
+<body>
+{% if publisher_list %}
+<ol>
+{% for publisher in publisher_list %}
+<li>
+     <a href =" {{publisher.get_absolute_url}}"><strong>Publisher:</strong> {{ publisher.name }}
+</li>
+      {% endfor %}
+</ol>
+{%else%}
+<p>No Publishers</p>
+{%endif%}
+
+</body>
+</html>

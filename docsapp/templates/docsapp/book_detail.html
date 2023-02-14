@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book</title>
+</head>
+<body>
+<p><a href =" {% url 'docsapp:index' %}">Home</a></p>
+{% block content %}
+<a href =" {% url 'docsapp:book' %}">All Books</a>
+  <h1>{{ book.name}}</h1>
+<ul>
+<li>
+    <p><strong>Author:</strong>{{ book.authors.all|join:", " }}</p>
+  <p><strong>Pages:</strong> {{ book.pages }}</p>
+  <p><strong>Price:</strong> {{ book.price }}</p>
+  <p><strong>Rating:</strong> {{ book.rating }}</p>
+  <p><strong>Publisher:</strong> {{ book.publisher.name }}</p>
+
+
+</li>
+</ul>
+{% endblock %}
+</body>
+</html>

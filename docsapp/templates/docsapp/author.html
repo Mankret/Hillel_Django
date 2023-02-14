@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Author</title>
+</head>
+<body>
+  <strong>Authors:</strong>
+{% if author_list %}
+<ol>
+{% for author in author_list %}
+
+
+<li>
+     <a href =" {{author.get_absolute_url}}">{{ author.name }}</a>
+</li>
+      {% endfor %}
+</ol>
+{%else%}
+<p>No Authors</p>
+{%endif%}
+
+</body>
+</html>
