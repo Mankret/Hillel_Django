@@ -48,6 +48,5 @@ class Command(BaseCommand):
         for _ in range(10):
             temp_books = [books.pop(0) for i in range(10)]
             author = Author.objects.create(name=fake.name(), age=random.randint(20, 80))
-            author.save()
             author.book_set.add(*temp_books)
-
+            author.save()
