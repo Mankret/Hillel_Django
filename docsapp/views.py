@@ -1,8 +1,15 @@
+from datetime import timedelta
+
+from django.contrib import messages
 from django.db.models import Count, Max, Min, Sum
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.urls import reverse
+from django.utils import timezone
 from django.views import generic
 
+from docsapp.forms import SendEmailForm
 from docsapp.models import Author, Book, Publisher, Store
+from docsapp.task import sending_mail
 
 
 def index(request):
@@ -82,3 +89,27 @@ class StoreDetailView(generic.DetailView):
     def get_queryset(self):
         return Store.objects.annotate(Count('books'))
 
+
+def send_email(request):
+    if request.method == 'POST':
+        form = SendEmailForm(request.POST)
+        if form.is_valid():
+            time = form.cleaned_data['receiving_time']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            more_then_two_days = timezone.now() + timedelta(days=2)
+            if time < timezone.now():
+                messages.error(request, 'Invalid value! Date cannot be in the past!')
+                form = SendEmailForm()
+                return render(request, 'send_email.html', {'form': form})
+            if time > more_then_two_days:
+                messages.error(request, 'Invalid value! Date cannot be more than two days! ')
+                form = SendEmailForm()
+                return render(request, 'send_email.html', {'form': form})
+            sending_mail.apply_async(args=(email, message),
+                                     eta=time
+                                     )
+            return redirect(reverse('docsapp:send_email'))
+    else:
+        form = SendEmailForm()
+    return render(request, 'send_email.html', {'form': form})

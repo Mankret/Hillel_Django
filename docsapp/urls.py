@@ -17,3 +17,6 @@ urlpatterns += [
     path('publisher/<int:pk>/', views.PublisherDetailView.as_view(), name='publisher_detail'),
     path('store/<int:pk>/', views.StoreDetailView.as_view(), name='store_detail'),
     ]
+urlpatterns += [
+    path('email/', views.send_email, name='send_email')
+]
