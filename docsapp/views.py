@@ -1,9 +1,10 @@
 from datetime import timedelta
 
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count, Max, Min, Sum
 from django.shortcuts import redirect, render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.views import generic
 
@@ -27,7 +28,7 @@ def index(request):
 
 class AuthorView(generic.ListView):
     model = Author
-    paginate_by = 10
+    paginate_by = 3
     template_name = 'docsapp/author.html'
 
     def get_queryset(self):
@@ -113,3 +114,18 @@ def send_email(request):
     else:
         form = SendEmailForm()
     return render(request, 'send_email.html', {'form': form})
+
+
+class AuthorCreate(LoginRequiredMixin, generic.CreateView):
+    model = Author
+    fields = ['name', 'age']
+
+
+class AuthorUpdate(LoginRequiredMixin, generic.UpdateView):
+    model = Author
+    fields = ['name', 'age']
+
+
+class AuthorDelete(LoginRequiredMixin, generic.DeleteView):
+    model = Author
+    success_url = reverse_lazy('docsapp:author')

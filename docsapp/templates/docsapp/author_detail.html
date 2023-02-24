@@ -7,12 +7,15 @@
 <body>
 <p><a href =" {% url 'docsapp:index' %}">Home</a></p>
 <a href =" {% url 'docsapp:author' %}">All Authors</a>
+
 {% block content %}
   <h1>Title: {{ author.name}}</h1>
 
   <p><strong>Author:</strong> {{ author.name }}</p>
   <p><strong>Age:</strong> {{ author.age }}</p>
   <p><strong>Count of pages written:</strong> {{ author.total_pages }}</p>
+<p><a href="{% url 'docsapp:author_update' author.pk %}">Update Author</a></p>
+<p><a href="{% url 'docsapp:author_delete' author.pk %}">Delete Author</a></p>
 
 
 
