@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'catalog',
     'mathapp',
     'docsapp',
+    'celery_beat_parsing',
 ]
 
 MIDDLEWARE = [
