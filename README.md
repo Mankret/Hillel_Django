@@ -1,3 +1,8 @@
+Celery beat: catalog/celery.py; docsapp/task.py
+
+
+
+
 Visualization of the work of the catalog application.
 
 ![Catalog](https://github.com/Mankret/Hillel_Django/blob/main/static/my_project_visualized.png)
