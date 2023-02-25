@@ -1,11 +1,12 @@
 from bs4 import BeautifulSoup
+
 from celery import shared_task
-import requests
+
+from celery_beat_parsing.models import Author, Quotes
 
 from django.core.mail import send_mail
-from django.utils import timezone
 
-from celery_beat_parsing.models import Quotes, Author
+import requests
 
 
 @shared_task
