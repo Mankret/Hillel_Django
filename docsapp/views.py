@@ -2,17 +2,20 @@ from datetime import timedelta
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Count, Max, Min, Sum
+from django.db.models import Count, Max, Min, Sum, Avg
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from django.views import generic
+from django.views.decorators.cache import cache_page
 
 from docsapp.forms import SendEmailForm
 from docsapp.models import Author, Book, Publisher, Store
 from docsapp.task import sending_mail
 
 
+@cache_page(10)
 def index(request):
     book_all = Book.objects.count()
     author_all = Author.objects.count()
@@ -26,21 +29,31 @@ def index(request):
                                                           })
 
 
+@method_decorator(cache_page(10), "get")
 class AuthorView(generic.ListView):
     model = Author
-    paginate_by = 3
+    paginate_by = 200
     template_name = 'docsapp/author.html'
 
     def get_queryset(self):
-        return Author.objects.all()
+        return Author.objects.annotate(Count('book'))
 
 
+@method_decorator(cache_page(15), "get")
 class BookView(generic.ListView):
     model = Book
+    paginate_by = 300
     template_name = 'docsapp/book.html'
 
     def get_queryset(self):
-        return Book.objects.all()
+        return Book.objects.annotate(Count('authors'))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['book_aver'] = Book.objects.aggregate(Avg('price'))
+        context['book_max'] = Book.objects.aggregate(Max('price'))
+        context['book_max_rating'] = Book.objects.aggregate(Max('rating'))
+        return context
 
 
 class PublisherView(generic.ListView):

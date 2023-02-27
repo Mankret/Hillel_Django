@@ -14,7 +14,7 @@
 
 
 <li>
-     <a href =" {{author.get_absolute_url}}">{{ author.name }}</a>
+     <a href =" {{author.get_absolute_url}}">{{ author.name }}</a>, <a>Books: {{author.book__count}}</a>
 </li>
       {% endfor %}
 </ul>

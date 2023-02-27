@@ -5,18 +5,50 @@
     <title>Books</title>
 </head>
 <body>
+ <p><a href =" {% url 'docsapp:index' %}">Home</a></p>
+
 {% if book_list %}
+ {% for key, values in book_aver.items %}
+<p><strong>Average book price: </strong>{{values}} </p>
+    {% endfor %}
+ {% for key, values in book_max.items %}
+<p><strong>Max book price: </strong>{{values}} </p>
+    {% endfor %}
+ {% for key, values in book_max_rating.items %}
+<p><strong>Max book rating: </strong>{{values}}</p>
+    {% endfor %}
 <ol>
 {% for book in book_list %}
 <li>
 
-   <a href =" {{book.get_absolute_url}}">{{book.name}}</a>
+   <a href =" {{book.get_absolute_url}}">{{book}}</a>, <a>Book pages: {{book.pages}}</a>,
+    <a>Number of Authors: {{book.authors__count}}; Name Author: {{book.authors.all|join:", "}}</a>
 </li>
       {% endfor %}
 </ol>
 {%else%}
 <p>No Books</p>
 {%endif%}
+{% block pagination %}
+  {% if is_paginated%}
+    <div class="pagination">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+              <a href="?page=1">first</a>
+              <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+           <span class="page-current">
+               Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+           </span>
+          {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last</a>
+          {% endif %}
+        </span>
+    </div>
+  {% endif %}
+{% endblock %}
+
 
 </body>
 </html>
